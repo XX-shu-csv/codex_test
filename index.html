@@ -336,24 +336,176 @@
           padding: 8px 10px;
         }
       }
+
+      .wheel-shell {
+        position: relative;
+        display: block;
+        width: min(100%, 520px);
+        min-height: 100svh;
+        margin: 0 auto;
+        padding: 0;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .wheel-shell .draw-panel {
+        display: grid;
+        min-height: 100svh;
+        grid-template-rows: auto minmax(0, 1fr) auto auto;
+        gap: 10px;
+        border: 0;
+        border-radius: 0;
+        padding: 10px 14px 88px;
+        background: #fff;
+        box-shadow: none;
+      }
+
+      .top-bar {
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr) 44px;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .app-title-block {
+        text-align: center;
+      }
+
+      .wheel-shell h1 {
+        font-size: 22px;
+      }
+
+      .icon-button,
+      .dock-button,
+      .sheet-close {
+        display: grid;
+        place-items: center;
+        border: 0;
+        color: #1463ff;
+        background: #f2f4f9;
+        font-weight: 900;
+      }
+
+      .icon-button {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+      }
+
+      .wheel-shell .draw-surface {
+        min-height: 0;
+        border-radius: 18px;
+        background: #f8f9fd;
+        color: #141821;
+      }
+
+      .wheel-shell .result-number {
+        color: #111;
+        font-size: clamp(96px, 34vw, 172px);
+      }
+
+      .bottom-dock {
+        position: fixed;
+        right: 12px;
+        bottom: 14px;
+        left: 12px;
+        z-index: 8;
+        display: grid;
+        grid-template-columns: 58px minmax(0, 1fr) 58px;
+        gap: 8px;
+        max-width: 496px;
+        margin: 0 auto;
+      }
+
+      .dock-button,
+      .dock-reset,
+      .bottom-dock .primary-button {
+        min-height: 58px;
+        border: 0;
+        border-radius: 999px;
+        color: #1463ff;
+        background: #f2f4f9;
+        font-weight: 900;
+      }
+
+      .sheet-panel {
+        position: fixed;
+        right: 12px;
+        bottom: 84px;
+        left: 12px;
+        z-index: 10;
+        max-width: 496px;
+        max-height: min(58svh, 420px);
+        margin: 0 auto;
+        border: 1px solid #d9deea;
+        border-radius: 18px;
+        padding: 14px;
+        overflow: auto;
+        background: #fff;
+        box-shadow: 0 20px 60px rgba(35, 45, 72, 0.2);
+      }
+
+      .sheet-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .sheet-close {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+      }
     </style>
   </head>
   <body>
-    <main class="app-shell" aria-labelledby="app-title">
-      <section class="setup-panel" aria-label="抽選の設定">
-        <div>
-          <div class="title-row">
-            <div>
-              <p class="eyebrow">Random order</p>
-              <h1 id="app-title">順番シャッフル</h1>
-            </div>
-            <details class="help-popover">
-              <summary aria-label="使い方を表示">?</summary>
-              <p>最大の数字を入れて開始。画面をタップするたび、未表示の数字から重複なく表示します。</p>
-            </details>
+    <main class="app-shell wheel-shell" aria-labelledby="app-title">
+      <section class="draw-panel" aria-label="抽選エリア">
+        <header class="top-bar">
+          <button class="icon-button" id="settings-shortcut" type="button" aria-label="設定を開く">⚙</button>
+          <div class="app-title-block">
+            <p class="eyebrow">Random order</p>
+            <h1 id="app-title">順番シャッフル</h1>
+          </div>
+          <button class="icon-button" id="help-toggle" type="button" aria-label="使い方を表示">?</button>
+        </header>
+
+        <button class="draw-surface" id="draw-surface" type="button" disabled>
+          <span class="status-text" id="status-text">数字を入力して開始</span>
+          <span class="result-number" id="result-number">--</span>
+          <span class="tap-hint" id="tap-hint">右下の編集から最大値を設定</span>
+        </button>
+
+        <div class="stats-grid" aria-label="抽選状況">
+          <div>
+            <span>残り</span>
+            <strong id="remaining-count">0</strong>
+          </div>
+          <div>
+            <span>表示済み</span>
+            <strong id="drawn-count">0</strong>
+          </div>
+          <div>
+            <span>最大値</span>
+            <strong id="max-count">未設定</strong>
           </div>
         </div>
 
+        <div class="bottom-dock" aria-label="操作">
+          <button class="dock-button" id="history-toggle" type="button" aria-label="履歴を開く">…</button>
+          <button class="dock-reset" id="reset-button" type="button" disabled>リセット</button>
+          <button class="dock-button" id="settings-toggle" type="button" aria-label="設定を開く">✎</button>
+          <button class="primary-button hidden" id="restart-button" type="button">もう一度はじめる</button>
+        </div>
+      </section>
+
+      <section class="sheet-panel hidden" id="settings-sheet" aria-labelledby="settings-title">
+        <div class="sheet-head">
+          <h2 id="settings-title">設定</h2>
+          <button class="sheet-close" type="button" data-close-sheet="settings-sheet" aria-label="設定を閉じる">×</button>
+        </div>
         <form class="setup-form" id="setup-form" novalidate>
           <label for="max-number">最大の数字</label>
           <div class="input-row">
@@ -379,40 +531,23 @@
         </form>
       </section>
 
-      <section class="draw-panel" aria-label="抽選エリア">
-        <button class="draw-surface" id="draw-surface" type="button" disabled>
-          <span class="status-text" id="status-text">数字を入力して開始</span>
-          <span class="result-number" id="result-number">--</span>
-          <span class="tap-hint" id="tap-hint">開始すると、この大きなエリアをタップして抽選できます</span>
-        </button>
-
-        <div class="stats-grid" aria-label="抽選状況">
+      <section class="sheet-panel hidden" id="history-sheet" aria-labelledby="history-title">
+        <div class="sheet-head">
           <div>
-            <span>残り</span>
-            <strong id="remaining-count">0</strong>
-          </div>
-          <div>
-            <span>表示済み</span>
-            <strong id="drawn-count">0</strong>
-          </div>
-          <div>
-            <span>最大値</span>
-            <strong id="max-count">未設定</strong>
-          </div>
-        </div>
-
-        <div class="action-row">
-          <button class="secondary-button" id="reset-button" type="button" disabled>リセット</button>
-          <button class="primary-button hidden" id="restart-button" type="button">もう一度はじめる</button>
-        </div>
-
-        <details class="history-panel" id="history-panel">
-          <summary class="history-head">
             <h2 id="history-title">履歴</h2>
             <span id="history-summary">まだありません</span>
-          </summary>
-          <ol class="history-list" id="history-list" aria-live="polite"></ol>
-        </details>
+          </div>
+          <button class="sheet-close" type="button" data-close-sheet="history-sheet" aria-label="履歴を閉じる">×</button>
+        </div>
+        <ol class="history-list" id="history-list" aria-live="polite"></ol>
+      </section>
+
+      <section class="sheet-panel hidden" id="help-sheet" aria-labelledby="help-title">
+        <div class="sheet-head">
+          <h2 id="help-title">使い方</h2>
+          <button class="sheet-close" type="button" data-close-sheet="help-sheet" aria-label="使い方を閉じる">×</button>
+        </div>
+        <p class="sheet-copy">最大の数字を入れて開始。画面をタップするたび、未表示の数字から重複なく表示します。</p>
       </section>
     </main>
 

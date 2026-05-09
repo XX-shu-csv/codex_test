@@ -1,4 +1,4 @@
-const CACHE_NAME = "order-shuffle-v2";
+const CACHE_NAME = "order-shuffle-v3";
 const CACHE_URLS = [
   "./",
   "./index.html",

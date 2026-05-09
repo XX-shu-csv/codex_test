@@ -16,6 +16,13 @@ const resetButton = document.querySelector("#reset-button");
 const restartButton = document.querySelector("#restart-button");
 const historySummary = document.querySelector("#history-summary");
 const historyList = document.querySelector("#history-list");
+const settingsSheet = document.querySelector("#settings-sheet");
+const historySheet = document.querySelector("#history-sheet");
+const helpSheet = document.querySelector("#help-sheet");
+const settingsButtons = document.querySelectorAll("#settings-toggle, #settings-shortcut");
+const historyToggle = document.querySelector("#history-toggle");
+const helpToggle = document.querySelector("#help-toggle");
+const closeSheetButtons = document.querySelectorAll("[data-close-sheet]");
 
 let maxNumber = null;
 let availableNumbers = [];
@@ -72,6 +79,19 @@ function stepMaxNumber(direction) {
   maxNumberInput.focus();
 }
 
+function closeSheets() {
+  [settingsSheet, historySheet, helpSheet].forEach((sheet) => sheet.classList.add("hidden"));
+}
+
+function toggleSheet(sheet) {
+  const isOpen = !sheet.classList.contains("hidden");
+  closeSheets();
+
+  if (!isOpen) {
+    sheet.classList.remove("hidden");
+  }
+}
+
 function startDraw(limit) {
   maxNumber = limit;
   availableNumbers = shuffleNumbers(limit);
@@ -88,6 +108,7 @@ function startDraw(limit) {
   statusText.textContent = "準備完了";
   resultNumber.textContent = "--";
   tapHint.textContent = "タップして次の数字を表示";
+  closeSheets();
 
   renderState();
 }
@@ -179,6 +200,26 @@ maxNumberInput.addEventListener("input", () => {
 stepButtons.forEach((button) => {
   button.addEventListener("click", () => {
     stepMaxNumber(Number(button.dataset.step));
+  });
+});
+
+settingsButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    toggleSheet(settingsSheet);
+  });
+});
+
+historyToggle.addEventListener("click", () => {
+  toggleSheet(historySheet);
+});
+
+helpToggle.addEventListener("click", () => {
+  toggleSheet(helpSheet);
+});
+
+closeSheetButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    document.querySelector(`#${button.dataset.closeSheet}`).classList.add("hidden");
   });
 });
 
