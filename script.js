@@ -14,6 +14,7 @@ const drawnCount = document.querySelector("#drawn-count");
 const maxCount = document.querySelector("#max-count");
 const resetButton = document.querySelector("#reset-button");
 const restartButton = document.querySelector("#restart-button");
+const bottomDock = document.querySelector("#bottom-dock");
 const historySummary = document.querySelector("#history-summary");
 const historyList = document.querySelector("#history-list");
 const settingsSheet = document.querySelector("#settings-sheet");
@@ -104,6 +105,7 @@ function startDraw(limit) {
   drawSurface.disabled = false;
   resetButton.disabled = false;
   restartButton.classList.add("hidden");
+  bottomDock.classList.remove("is-complete");
 
   statusText.textContent = "準備完了";
   resultNumber.textContent = "--";
@@ -139,6 +141,7 @@ function completeDraw() {
   statusText.textContent = "完了";
   tapHint.textContent = "すべて表示しました。もう一度はじめる場合は確認ボタンを押してください。";
   restartButton.classList.remove("hidden");
+  bottomDock.classList.add("is-complete");
 }
 
 function resetDraw() {
@@ -150,6 +153,7 @@ function resetDraw() {
   drawSurface.disabled = true;
   resetButton.disabled = true;
   restartButton.classList.add("hidden");
+  bottomDock.classList.remove("is-complete");
   formMessage.textContent = "2〜999の整数を入力してください。";
   formMessage.dataset.state = "";
   statusText.textContent = "数字を入力して開始";

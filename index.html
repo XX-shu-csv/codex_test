@@ -428,6 +428,10 @@
         font-weight: 900;
       }
 
+      .bottom-dock.is-complete {
+        grid-template-columns: 58px minmax(0, 1fr) 58px;
+      }
+
       .sheet-panel {
         position: fixed;
         right: 12px;
@@ -443,6 +447,12 @@
         overflow: auto;
         background: #fff;
         box-shadow: 0 20px 60px rgba(35, 45, 72, 0.2);
+      }
+
+      #history-sheet {
+        top: 76px;
+        bottom: 84px;
+        max-height: none;
       }
 
       .sheet-head {
@@ -493,8 +503,8 @@
           </div>
         </div>
 
-        <div class="bottom-dock" aria-label="操作">
-          <button class="dock-button" id="history-toggle" type="button" aria-label="履歴を開く">…</button>
+        <div class="bottom-dock" id="bottom-dock" aria-label="操作">
+          <button class="dock-button" id="history-toggle" type="button" aria-label="履歴を開く">☷</button>
           <button class="dock-reset" id="reset-button" type="button" disabled>リセット</button>
           <button class="dock-button" id="settings-toggle" type="button" aria-label="設定を開く">✎</button>
           <button class="primary-button hidden" id="restart-button" type="button">もう一度はじめる</button>
