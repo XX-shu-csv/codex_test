@@ -112,8 +112,25 @@ h1 {
 }
 
 .input-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 54px auto;
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.input-row input {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+
+.input-row > button[type="submit"] {
+  flex: 0 0 auto;
+  min-width: 88px;
+}
+
+.stepper-buttons {
+  display: flex;
+  flex: 0 0 92px;
   gap: 10px;
 }
 
@@ -146,15 +163,11 @@ input:focus {
   cursor: pointer;
 }
 
-.stepper-buttons {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: 6px;
-}
-
 .stepper-buttons button {
   display: grid;
-  min-height: 0;
+  flex: 1;
+  min-width: 0;
+  min-height: 56px;
   place-items: center;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -378,12 +391,18 @@ h2 {
   }
 
   .input-row {
-    grid-template-columns: minmax(0, 1fr) 54px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 92px;
+    align-items: stretch;
   }
 
   .input-row > button[type="submit"] {
     grid-column: 1 / -1;
     width: 100%;
+  }
+
+  .stepper-buttons {
+    width: 92px;
   }
 
   .stats-grid {
