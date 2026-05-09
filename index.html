@@ -3,199 +3,81 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ORBIT ONE | 部屋に天気を置く</title>
+    <title>順番シャッフル</title>
     <meta
       name="description"
-      content="ORBIT ONEは、手のひらサイズのガラス球に天気を閉じ込める新しいホームプロダクトです。"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
-      rel="stylesheet"
+      content="1から入力した数までを重複なくランダム表示する、順番決め用のシンプルなWebアプリです。"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="weather-field" aria-hidden="true">
-      <span class="particle particle-a"></span>
-      <span class="particle particle-b"></span>
-      <span class="particle particle-c"></span>
-      <span class="particle particle-d"></span>
-    </div>
-
-    <aside class="side-rail" aria-label="ORBIT ONE サイドバー">
-      <a class="side-brand" href="#top" aria-label="ORBIT ONE トップへ">
-        <span class="brand-mark"></span>
-        <span>ORBIT ONE</span>
-      </a>
-      <div class="side-status">
-        <span class="side-kicker">Current weather</span>
-        <strong id="sidebar-mode">Aurora Rain</strong>
-        <p>今の演出を見ながら、気になる情報へすぐ移動できます。</p>
-      </div>
-      <nav class="side-nav" aria-label="ページ内ナビゲーション">
-        <a href="#top"><span>01</span>体験を見る</a>
-        <a href="#trials"><span>02</span>比較理由</a>
-        <a href="#modes"><span>03</span>天気を試す</a>
-        <a href="#inside"><span>04</span>仕組み</a>
-        <a href="#reserve"><span>05</span>予約</a>
-      </nav>
-      <div class="side-modes" aria-label="天気クイック切替">
-        <span class="side-kicker">Quick mode</span>
-        <div class="side-mode-buttons" role="group" aria-label="天気モード">
-          <button class="active" type="button" data-mode="aurora" aria-label="Aurora Rainに切り替え"></button>
-          <button type="button" data-mode="storm" aria-label="Silent Stormに切り替え"></button>
-          <button type="button" data-mode="sunset" aria-label="Pocket Sunsetに切り替え"></button>
-          <button type="button" data-mode="mist" aria-label="Morning Mistに切り替え"></button>
-        </div>
-      </div>
-      <div class="side-spec">
-        <span class="side-kicker">First edition</span>
-        <strong>300台限定</strong>
-        <p>18時間駆動 / 無音浮遊 / 4つの天気モード</p>
-        <a class="side-cta" href="#reserve">予約へ</a>
-      </div>
-    </aside>
-
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="ORBIT ONE">
-        <span class="brand-mark"></span>
-        <span>ORBIT ONE</span>
-      </a>
-      <nav class="nav" aria-label="主要ナビゲーション">
-        <a href="#modes">Modes</a>
-        <a href="#inside">Inside</a>
-        <a href="#reserve">Reserve</a>
-      </nav>
-    </header>
-
-    <main id="top">
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">室内天気デバイス</p>
-          <h1>部屋に、天気を置く。</h1>
-          <p class="lead">
-            ORBIT ONEは、浮遊するガラス球の中に雲、雨、稲妻、オーロラを生み出すホームプロダクト。
-            ただの照明ではなく、空気の気分まで変えるための小さな気象装置です。
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#reserve">先行予約</a>
-            <a class="button ghost" href="#modes">天気を切り替える</a>
-          </div>
-          <div class="proof-grid" aria-label="商品特徴">
-            <div>
-              <strong>4</strong>
-              <span>weather modes</span>
-            </div>
-            <div>
-              <strong>18h</strong>
-              <span>ambient runtime</span>
-            </div>
-            <div>
-              <strong>0db</strong>
-              <span>silent levitation</span>
-            </div>
-          </div>
-        </div>
-        <div class="hero-media">
-          <img src="assets/orbit-one-hero.png" alt="浮遊するガラス球に小さな天気を映すORBIT ONE" />
-          <div class="signal-card">
-            <span>Now playing</span>
-            <strong id="current-mode">Aurora Rain</strong>
-          </div>
-        </div>
-      </section>
-
-      <section class="product-trials" id="trials" aria-labelledby="trials-title">
-        <div class="section-head">
-          <p class="eyebrow">検討したLP案</p>
-          <h2 id="trials-title">驚きが最も強い商品を選びました。</h2>
-        </div>
-        <div class="trial-grid">
-          <article>
-            <span>01</span>
-            <h3>睡眠ポッド</h3>
-            <p>高級感は出しやすい一方、既視感が残るため見た瞬間の意外性は中程度。</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>香りのスピーカー</h3>
-            <p>コンセプトは面白いが、Web上では香りを直接伝えにくい。</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>スマートリング</h3>
-            <p>機能訴求は明快。ただしビジュアルの驚きは小さなデバイスに収まりがち。</p>
-          </article>
-          <article class="selected">
-            <span>04</span>
-            <h3>室内天気オーブ</h3>
-            <p>「天気を所有する」という一言で強い違和感と期待を作れるため採用。</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="modes" id="modes" aria-labelledby="modes-title">
-        <div class="mode-stage">
-          <div class="orb-demo" aria-hidden="true">
-            <span class="orb-core"></span>
-            <span class="orb-ring ring-one"></span>
-            <span class="orb-ring ring-two"></span>
-            <span class="bolt"></span>
-            <span class="rain rain-one"></span>
-            <span class="rain rain-two"></span>
-          </div>
-        </div>
-        <div class="mode-panel">
-          <p class="eyebrow">Interactive Modes</p>
-          <h2 id="modes-title">気分で、空を選ぶ。</h2>
-          <p>
-            透明な球体の中で、光・微細ミスト・磁気浮遊が連動します。
-            下のボタンでLP全体の天気演出も切り替わります。
-          </p>
-          <div class="mode-buttons" role="group" aria-label="天気モード">
-            <button class="active" type="button" data-mode="aurora">Aurora</button>
-            <button type="button" data-mode="storm">Storm</button>
-            <button type="button" data-mode="sunset">Sunset</button>
-            <button type="button" data-mode="mist">Mist</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="inside" id="inside" aria-labelledby="inside-title">
-        <div class="section-head">
-          <p class="eyebrow">Inside the sphere</p>
-          <h2 id="inside-title">小さな球体に、舞台装置を詰め込む。</h2>
-        </div>
-        <div class="inside-grid">
-          <article>
-            <h3>Micro cloud engine</h3>
-            <p>超音波ミストが光を受け、雲の輪郭を数秒ごとに変化させます。</p>
-          </article>
-          <article>
-            <h3>Magnetic levitation</h3>
-            <p>台座に触れずに浮かぶことで、現実から少しだけ切り離された存在感を作ります。</p>
-          </article>
-          <article>
-            <h3>Reactive ambience</h3>
-            <p>時間帯と部屋の明るさに合わせ、強すぎない演出へ自動調整します。</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="reserve" id="reserve" aria-labelledby="reserve-title">
+    <main class="app-shell" aria-labelledby="app-title">
+      <section class="setup-panel" aria-label="抽選の設定">
         <div>
-          <p class="eyebrow">First edition</p>
-          <h2 id="reserve-title">最初の300台だけ、シリアル入り。</h2>
+          <p class="eyebrow">Random order</p>
+          <h1 id="app-title">順番シャッフル</h1>
+          <p class="lead">人数や番号の最大値を入れて、画面をタップするだけ。出た数字は重複しません。</p>
         </div>
-        <form class="reserve-form">
-          <label>
-            <span>Email</span>
-            <input type="email" placeholder="you@example.com" required />
-          </label>
-          <button class="button primary" type="submit">予約リストに入る</button>
+
+        <form class="setup-form" id="setup-form" novalidate>
+          <label for="max-number">最大の数字</label>
+          <div class="input-row">
+            <input
+              id="max-number"
+              name="max-number"
+              type="number"
+              inputmode="numeric"
+              min="2"
+              max="999"
+              step="1"
+              placeholder="例: 6"
+              autocomplete="off"
+              required
+            />
+            <div class="stepper-buttons" aria-label="最大の数字を上下する">
+              <button type="button" data-step="1" aria-label="最大の数字を1増やす">▲</button>
+              <button type="button" data-step="-1" aria-label="最大の数字を1減らす">▼</button>
+            </div>
+            <button type="submit">開始</button>
+          </div>
+          <p class="form-help" id="form-message" aria-live="polite">2〜999の整数を入力してください。</p>
         </form>
+      </section>
+
+      <section class="draw-panel" aria-label="抽選エリア">
+        <button class="draw-surface" id="draw-surface" type="button" disabled>
+          <span class="status-text" id="status-text">数字を入力して開始</span>
+          <span class="result-number" id="result-number">--</span>
+          <span class="tap-hint" id="tap-hint">開始すると、この大きなエリアをタップして抽選できます</span>
+        </button>
+
+        <div class="stats-grid" aria-label="抽選状況">
+          <div>
+            <span>残り</span>
+            <strong id="remaining-count">0</strong>
+          </div>
+          <div>
+            <span>表示済み</span>
+            <strong id="drawn-count">0</strong>
+          </div>
+          <div>
+            <span>最大値</span>
+            <strong id="max-count">未設定</strong>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button class="secondary-button" id="reset-button" type="button" disabled>リセット</button>
+          <button class="primary-button hidden" id="restart-button" type="button">もう一度はじめる</button>
+        </div>
+
+        <section class="history-panel" aria-labelledby="history-title">
+          <div class="history-head">
+            <h2 id="history-title">履歴</h2>
+            <span id="history-summary">まだありません</span>
+          </div>
+          <ol class="history-list" id="history-list" aria-live="polite"></ol>
+        </section>
       </section>
     </main>
 
