@@ -80,6 +80,46 @@
         color: #697286;
       }
 
+      .title-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .help-popover {
+        position: relative;
+      }
+
+      .help-popover summary {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border: 1px solid #d9deea;
+        border-radius: 50%;
+        color: #1463ff;
+        background: #fff;
+        font-weight: 900;
+        list-style: none;
+      }
+
+      .help-popover p {
+        position: absolute;
+        top: 46px;
+        right: 0;
+        z-index: 4;
+        width: min(260px, calc(100vw - 32px));
+        margin: 0;
+        border: 1px solid #d9deea;
+        border-radius: 8px;
+        padding: 12px;
+        background: #fff;
+        box-shadow: 0 16px 40px rgba(35, 45, 72, 0.16);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
       .input-row {
         display: flex;
         flex-wrap: wrap;
@@ -186,7 +226,12 @@
       .history-list {
         display: grid;
         gap: 8px;
-        padding: 0;
+        padding: 12px;
+        list-style: none;
+      }
+
+      .history-head {
+        cursor: pointer;
         list-style: none;
       }
 
@@ -218,6 +263,19 @@
         .input-row > button[type="submit"] {
           grid-column: 1 / -1;
         }
+
+        h1 {
+          font-size: 32px;
+        }
+
+        .setup-panel,
+        .draw-panel {
+          padding: 10px;
+        }
+
+        .draw-surface {
+          min-height: 240px;
+        }
       }
     </style>
   </head>
@@ -225,9 +283,16 @@
     <main class="app-shell" aria-labelledby="app-title">
       <section class="setup-panel" aria-label="抽選の設定">
         <div>
-          <p class="eyebrow">Random order</p>
-          <h1 id="app-title">順番シャッフル</h1>
-          <p class="lead">人数や番号の最大値を入れて、画面をタップするだけ。出た数字は重複しません。</p>
+          <div class="title-row">
+            <div>
+              <p class="eyebrow">Random order</p>
+              <h1 id="app-title">順番シャッフル</h1>
+            </div>
+            <details class="help-popover">
+              <summary aria-label="使い方を表示">?</summary>
+              <p>最大の数字を入れて開始。画面をタップするたび、未表示の数字から重複なく表示します。</p>
+            </details>
+          </div>
         </div>
 
         <form class="setup-form" id="setup-form" novalidate>
@@ -282,13 +347,13 @@
           <button class="primary-button hidden" id="restart-button" type="button">もう一度はじめる</button>
         </div>
 
-        <section class="history-panel" aria-labelledby="history-title">
-          <div class="history-head">
+        <details class="history-panel" id="history-panel">
+          <summary class="history-head">
             <h2 id="history-title">履歴</h2>
             <span id="history-summary">まだありません</span>
-          </div>
+          </summary>
           <ol class="history-list" id="history-list" aria-live="polite"></ol>
-        </section>
+        </details>
       </section>
     </main>
 
